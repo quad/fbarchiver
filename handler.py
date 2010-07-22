@@ -39,7 +39,7 @@ class JS(webapp.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/javascript'
 
-        for fn in glob.glob(os.path.join(os.path.dirname(__file__), 'js', '*.js')):
+        for fn in sorted(glob.glob(os.path.join(os.path.dirname(__file__), 'js', '*.js'))):
             self.response.out.write(file(fn).read())
 
 if __name__ == '__main__':
