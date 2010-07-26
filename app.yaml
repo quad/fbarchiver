@@ -1,9 +1,17 @@
-application: mybook
+application: fbarchiver
 version: 1
 runtime: python
 api_version: 1
 
 handlers:
+
+- url: /m/
+  static_files: m/index.html
+  upload: m/index.html
+
+- url: /m/js
+  static_dir: m/js
+  mime_type: text/javascript
 
 - url: /.*
   script: handler.py

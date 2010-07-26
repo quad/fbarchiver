@@ -1,4 +1,4 @@
-(function($) {
+(function() {
     function GetInboxSummaries(summariesHandler, errorHandler) {
         var summaries = [];
 
@@ -17,8 +17,7 @@
 
                         if (new_count > 0) {
                             _nextPage(start + new_count);
-                        }
-                        else {
+                        } else {
                             summariesHandler(summaries);
                         }
                     }
@@ -41,8 +40,7 @@
                     threads.push({summary: summary, thread: data.getPayload().thread});
 
                     if (threads.length < summaries.length) {
-                        UI.setBody('Got <strong>' + threads.length + '</strong> messages of your ' + summaries.length + ' messages.')
-                            .setTitleLoading(true);
+                        UI.setBody('Got <strong>' + threads.length + '</strong> messages of your ' + summaries.length + ' messages.');
                     } else {
                         threadHandler(threads);
                     }
@@ -53,63 +51,21 @@
     }
 
     function UI_Archive(threads) {
-        var output = window.open('', 'inbox').document;
+        var messages_uri = new URI($('mybook').src).setPath('/m/'),
+            child_uri = messages_uri.getQualifiedURI().setPath('');
 
-        output.write('<html>');
-        
-        output.write('<head>' +
-                     '<title>Your Facebook Messages</title>' +    /* TODO: What's the person's name? */
-                     '</head>');
+        window.addEventListener('message', function(event) {
+            var event_uri = new URI(event.origin);
 
-        output.write('<body>');
+            if (event_uri.toString() === child_uri.toString()) {
+                /* TODO: Get the person's name over. */
 
-        output.write('<h1>Inbox</h1>');
-
-        output.write('<ul>');
-        threads.forEach(function(t) {
-            /* Render summary. */
-            output.write('<li id="index-' + t.summary.threadId + '">' +
-                             '<a href="' + t.summary.icon.href + '">' +
-                                 '<img class="icon" alt="' + t.summary.icon.alt + '" src="' + t.summary.icon.image + '" />' +
-                                 '<span class="from">' + t.summary.icon.alt + '</span>' +
-                             '</a>' +
-                             '<span class="date">' + t.summary.timeLastUpdatedRendered + '</span>' +
-                             '<span class="subject">' + (t.summary.subject || '(no subject)') + '</span>' +
-                             '<span class="snippet">' + t.summary.snippet + '</span>');
-
-            /* Render the thread. */
-            output.write('<div class="thread">' +
-                             '<span class="subject">' + t.thread.subject + '</span>' +
-                             '<span class="authors">' + t.thread.renderedAuthorList + '</span>');
-
-            if (t.thread.messages) {
-                t.thread.messages.forEach(function(m) {
-                    output.write('<div class="message">' +
-                                     '<a href="' + m.author.href + '">' +
-                                         '<img class="icon" alt="' + m.author.name + '" src="' + m.author.picture + '" />' +
-                                         '<span class="from">' + m.author.name + '</span>' +
-                                     '</a>' +
-                                     '<span class="date">' + m.time_rendered + '</span>' +
-                                     '<span class="message">' + m.message + '</span>' +
-                                 '</div>');
+                threads.forEach(function(t) {
+                    event.source.postMessage(JSON.encode(t), event.origin);
                 });
             }
-
-            output.write('</div>');
-
-            output.write('</li>');
-        });
-        output.write('</ul>');
-
-        /* TODO: Sent */
-
-        output.write('</body>');
-
-        output.write('</html>');
-        output.close();
-
-        /* Another interesting option, that crashes Chrome, is:
-               window.open('data:text/html;charset=utf-8;base64,' + $.base64Encode(output), 'inbox'); */
+        }, false);
+        window.open(messages_uri.toString(), 'messages');
     }
 
     function UI_Download() {
@@ -120,7 +76,8 @@
             .showLoading();
 
         GetInboxSummaries(function(summaries) {
-            UI.show();
+            UI.show()
+                .setTitleLoading(true);
 
             GetInboxThreads(summaries, function(threads) {
                 UI.setBody('Got all <strong>' + threads.length + '</strong> of them messages. Whew. OK, ready to archive them?')
@@ -140,9 +97,10 @@
         .setBody('<ol><li>Get them.</li>' +
              '<li>Put them on single page that you can save.</li>' +
              '<li>??</li>' +
-             '<li>Profit.</li></ol>')
+             '<li>Profit.</li></ol>' +
+             '<p><strong>NOTHING</strong> is stored on our server. Everything stays in your browser.</p>')
         .setButtons([Dialog.NEXT, Dialog.CANCEL])
         .setHandler(UI_Download);
 
     UI.show();
-})(jQuery.noConflict());
+})();
