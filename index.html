@@ -1,13 +1,45 @@
 <html>
 	<head>
-		<title>MyBook: archive your Facebook</title>
+		<title>Archive your Facebook</title>
+		<style><!--
+
+		--></style>
 	</head>
 	<body>
 		<p>
-			{{ instructions }}
-			<strong>
-				<a class='bookmarklet' title="Archive your Facebook" href="javascript:(function(){var%20script=document.createElement('script');script.id='mybook';script.src='http://{{ bookmarklet_host }}/mybook.js';document.getElementsByTagName('head')[0].appendChild(script);})()">Archive your Facebook</a>
-			</strong>
-                </p>
+			Hi! I help you archive all your Facebook messages.
+		</p>
+
+		<p>
+			I work in your browser. <strong>NOTHING</strong> goes to a server.
+		</p>
+		
+		<p>
+			I'm a:
+			<ul>
+				<li>Prototype</li>
+				<li><em>Probably</em> totally against the Facebook TOS</li>
+			</ul>
+		</p>
+
+		<p>
+			Cool? OK.
+
+			<ol>
+				<li>
+					Add the bookmarklet. How?
+					<br />
+					{{ instructions }}:
+					<strong>
+						<a class='bookmarklet' title="Archive your Facebook" href="javascript:(function(){var%20script=document.createElement('script');script.id='mybook';script.src='http://{{ bookmarklet_host }}/mybook.js';document.getElementsByTagName('head')[0].appendChild(script);})()">Archive your Facebook</a>
+					</strong>
+				</li>
+				<li>Go to <a href="http://www.facebook.com/">Facebook</a></li>
+				<li>Click the bookmarklet</li>
+			</ol>
+		</p>
+
+		<p>Please <strong>DO</strong> <a href="mailto:scott@quadhome.com?subject=fbarchiver">mail me</a> about any issues. <a href="http://twitter.com/quadhome">@quadhome</a> works too.</p>
+		<p>Please <strong>DON'T</strong> spread this around. A proper version is coming soon.</p>
 	</body>
 </html>
