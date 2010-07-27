@@ -8,6 +8,12 @@ handlers:
 - url: /m/
   static_files: m/index.html
   upload: m/index.html
+  mime_type: text/html
+
+- url: /m/m.css
+  static_files: m/m.css
+  upload: m/m.css
+  mime_type: text/css
 
 - url: /m/js
   static_dir: m/js
