@@ -4,7 +4,7 @@
 		<title>Facebook Inbox Archiver (prototype)</title>
 		<link type="text/css" rel="stylesheet" href="css/index.css" />
 		<script type="text/javascript" src="js/jquery-1.4.2.js"></script>
-		<script type="text/javascript" src="js/ie-instructions.js"></script>
+		<script type="text/javascript" src="js/instructions.js"></script>
 	</head>
 	<body>
 		<noscript>Javascript. We needs it.</noscript>
@@ -17,23 +17,17 @@
 		
 		<h2>Cool!</h2>
 
-		<p>
-			I'm also:
-			<ul>
-				<li>A prototype.</li>
-				<li><em>Probably</em> against the Facebook TOS.</li>
-			</ul>
-		</p>
+		<p>Just so you know, I'm also:</p>
+
+		<ul>
+			<li>A prototype.</li>
+			<li><em>Probably</em> against the Facebook TOS.</li>
+		</ul>
 
 		<h2>Let's do it!</h2>
 
 		<ol>
-			<li>
-				Add me to your bookmarklets! How?
-				<br />
-				<span id="instructions">Drag this link to your web browser bookmarks bar</span>:
-				<a class='bookmarklet' title="Archive your Facebook" href="javascript:(function(){var%20script=document.createElement('script');script.id='mybook';script.src='http://{{ bookmarklet_host }}/mybook.js';document.getElementsByTagName('head')[0].appendChild(script);})()">Archive your Facebook</a>
-			</li>
+			<li id='instructions'><!-- Filled in by instructions.js --></li>
 			<li>Go to <a href="http://www.facebook.com/">Facebook</a>.</li>
 			<li>Click me!</li>
 		</ol>

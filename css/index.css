@@ -6,10 +6,12 @@ body {
 }
 
 .bookmarklet {
+    display: inline-block;
+
     color: white;
     background: #444;
 
-    padding: 0.5em;
+    padding: 0.25em;
 
     border-radius: 0.5em;
     -moz-border-radius: 0.5em;
@@ -18,4 +20,8 @@ body {
     box-shadow: 0 0 0.5em #444;
     -moz-box-shadow: 0 0 0.5em #444;
     -webkit-box-shadow: 0 0 0.5em #444;
+}
+
+li {
+    margin: 0.5em 0;
 }
