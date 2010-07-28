@@ -1,0 +1,27 @@
+td.face {
+	width: 50px;
+	vertical-align: top;
+}
+
+span.date { font-size: smaller; }
+
+/* SECTION: Meta */
+
+.meta .who { width: 200px; }
+.meta .what { width: auto; }
+
+.meta .name { display: block; }
+
+.meta .subject { display: block; }
+.meta .snippet { font-size: smaller; }
+
+/* SECTION: Thread */
+
+.thread > td { padding: 0 50px; }
+.thread .header { text-align: center; }
+
+/* SECTION: Message */
+
+.message .from {
+	font-weight: bold;
+}
