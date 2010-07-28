@@ -104,7 +104,7 @@
 
     function getThreads(ids, threadHandler, errorHandler) {
         var threads = {},
-            thread_count = 0;
+            threads_length = 0;
 
         ids.forEach(function (threadId) {
             new AsyncRequest('/ajax/gigaboxx/endpoint/ReadThread.php')
@@ -112,13 +112,13 @@
                 .setReadOnly(true)
                 .setHandler(function (data) {
                     threads[threadId] = data.getPayload().thread;
-                    thread_count++;
+                    threads_length++;
 
-                    if (thread_count < ids.length) {
+                    if (threads_length < ids.length) {
                         /* TODO: Move this into UI_Archive. */
-                        $('fbarchiver-inbox-count').innerHTML = threads.length;
+                        $('fbarchiver-inbox-count').innerHTML = threads_length;
                     } else {
-                        threadHandler(threads, thread_count);
+                        threadHandler(threads, threads_length);
                     }
                 })
                 .setErrorHandler(errorHandler)
